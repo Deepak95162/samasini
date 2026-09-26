@@ -2,7 +2,12 @@
 deployment:
   tasks:
     - export DEPLOYPATH=/home/samasini/public_html/console/
+    - export NO_UPDATE_NOTIFIER=1
+    - export NPM_CONFIG_UPDATE_NOTIFIER=false
+    - export NPM_CONFIG_FUND=false
+    - export NPM_CONFIG_AUDIT=false
     - /bin/mkdir -p $DEPLOYPATH
     - /bin/npm ci
-    - /bin/npm run build
+    - ./node_modules/.bin/tsc -b
+    - ./node_modules/.bin/vite build
     - /bin/cp -R dist/. $DEPLOYPATH
