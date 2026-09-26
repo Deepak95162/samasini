@@ -44,11 +44,16 @@ npm run dev
 ## Deployment (cPanel Git Version Control)
 
 - Repo: https://github.com/Deepak95162/samasini.git, branch `main`
+- **Build locally, commit `dist/`**: run `npm run build` on your machine and
+  commit the resulting `dist/` folder along with your source changes. The
+  cPanel host's account has a very low memory limit (128MB LVE), which is
+  not enough to run `tsc`/`vite`/`rollup` there — so the build never happens
+  on the server.
 - Push to `main` → in cPanel, Git Version Control → "Pull or Deploy" →
   "Deploy HEAD Commit".
-- `.cpanel.yml` builds the app (`npm ci && npm run build`) and copies the
-  static `dist/` output into the `console.samasini.com` document root.
-- This is a static build — no Node app process needs to stay running.
+- `.cpanel.yml` just copies the already-built `dist/` folder into the
+  `console.samasini.com` document root — no Node/npm/build step runs on the
+  server at all.
 
 ## What's next with more time
 
