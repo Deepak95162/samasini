@@ -1,0 +1,8 @@
+---
+deployment:
+  tasks:
+    - export DEPLOYPATH=/home/samasini/console.samasini.com/
+    - /bin/mkdir -p $DEPLOYPATH
+    - /usr/bin/npm ci
+    - /usr/bin/npm run build
+    - /bin/cp -R dist/. $DEPLOYPATH
