@@ -71,7 +71,7 @@
       align-items: center;
     }
 
-    .topline { justify-content: space-between; margin-bottom: 2.1%; }
+    .topline { justify-content: space-between; margin-bottom: 1.7%; }
     .brand { gap: 11px; font: 700 17px "Space Grotesk", sans-serif; letter-spacing: .2px; }
     .mark { width: 28px; height: 28px; position: relative; border: 1px solid var(--purple); transform: rotate(45deg); border-radius: 8px; }
     .mark::before, .mark::after { content: ""; position: absolute; inset: 6px; border: 1px solid var(--purple-soft); border-radius: 50%; }
@@ -80,70 +80,79 @@
     .edition { padding: 7px 10px; border: 1px solid var(--line); border-radius: 99px; }
     .edition b { color: var(--purple-soft); font-weight: 600; }
 
-    .hero { margin-bottom: 2.15%; }
-    .eyebrow { gap: 9px; color: var(--purple-soft); font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 10px; }
+    .hero { margin-bottom: 1.7%; }
+    .eyebrow { gap: 9px; color: var(--purple-soft); font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 9px; }
     .eyebrow::before { content: ""; width: 20px; height: 1px; background: var(--purple); }
-    h1 { max-width: 950px; margin: 0; font: 600 clamp(32px, 3.45vw, 54px)/1.02 "Space Grotesk", sans-serif; letter-spacing: -.6px; }
+    h1 { max-width: 1000px; margin: 0; font: 600 clamp(28px, 3.1vw, 46px)/1.04 "Space Grotesk", sans-serif; letter-spacing: -.6px; }
     h1 .accent { color: var(--purple-soft); }
 
-    .content { display: grid; grid-template-columns: .87fr 1.13fr; gap: 2.2%; align-items: stretch; }
-    .narrative { display: grid; grid-template-rows: 1.08fr .92fr; gap: 14px; min-width: 0; }
-    .story { position: relative; padding: 17px 19px 16px; background: rgba(16,18,30,.9); border: 1px solid var(--line); border-radius: 9px; overflow: hidden; }
+    .content { display: grid; grid-template-columns: .8fr 1.2fr; gap: 2%; align-items: stretch; }
+    .narrative { display: grid; grid-template-rows: repeat(3, 1fr); gap: 10px; min-width: 0; }
+    .story { position: relative; padding: 13px 16px 12px; background: rgba(16,18,30,.9); border: 1px solid var(--line); border-radius: 9px; overflow: hidden; }
     .story.problem { border-left: 2px solid var(--coral); }
     .story.why { border-left: 2px solid var(--gold); }
-    .section-label { gap: 8px; margin-bottom: 9px; color: var(--muted); font-size: 9px; font-weight: 700; letter-spacing: 1.6px; text-transform: uppercase; }
-    .section-label .pin { width: 6px; height: 6px; border-radius: 50%; background: var(--coral); }
+    .story.opinion { border-left: 2px solid var(--mint); }
+    .section-label { gap: 8px; margin-bottom: 6px; color: var(--muted); font-size: 8.5px; font-weight: 700; letter-spacing: 1.4px; text-transform: uppercase; }
+    .section-label .pin { width: 6px; height: 6px; border-radius: 50%; background: var(--coral); flex-shrink: 0; }
     .why .section-label .pin { background: var(--gold); }
-    .story h2 { margin: 0 0 8px; font: 600 17px/1.18 "Space Grotesk", sans-serif; }
-    .story p { margin: 0; color: #b9b8c8; font-size: clamp(11px, .95vw, 14px); line-height: 1.52; }
+    .opinion .section-label .pin { background: var(--mint); }
+    .story h2 { margin: 0 0 5px; font: 600 14.5px/1.16 "Space Grotesk", sans-serif; }
+    .story p { margin: 0; color: #b9b8c8; font-size: 10.5px; line-height: 1.42; }
     .story p strong { color: var(--text); font-weight: 600; }
-    .stakes { display: flex; gap: 7px; margin-top: 11px; }
-    .stake { padding: 5px 8px; border: 1px solid #353044; border-radius: 4px; color: #d3c7e2; font-size: 9px; }
+    .stakes { display: flex; gap: 6px; margin-top: 8px; }
+    .stake { padding: 4px 7px; border: 1px solid #353044; border-radius: 4px; color: #d3c7e2; font-size: 8px; }
     .stake:first-child { border-color: #583647; color: #ffaaa2; }
 
-    .product { min-width: 0; padding: 16px; border: 1px solid #343044; border-radius: 10px; background: linear-gradient(150deg, rgba(23,24,39,.98), rgba(14,15,25,.98)); box-shadow: inset 0 1px rgba(255,255,255,.035); }
-    .console-head { justify-content: space-between; padding-bottom: 12px; border-bottom: 1px solid var(--line); }
+    .product { min-width: 0; padding: 15px; border: 1px solid #343044; border-radius: 10px; background: linear-gradient(150deg, rgba(23,24,39,.98), rgba(14,15,25,.98)); box-shadow: inset 0 1px rgba(255,255,255,.035); display: flex; flex-direction: column; }
+    .console-head { justify-content: space-between; padding-bottom: 10px; border-bottom: 1px solid var(--line); }
     .console-title { font: 600 13px "Space Grotesk", sans-serif; }
     .live { display: flex; align-items: center; gap: 6px; color: var(--mint); font-size: 8px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; }
     .live i { width: 6px; height: 6px; background: var(--mint); border-radius: 50%; box-shadow: 0 0 10px rgba(110,231,196,.7); }
-    .journey { justify-content: space-between; position: relative; padding: 15px 4px 13px; }
-    .journey::before { content: ""; position: absolute; top: 23px; left: 9%; right: 9%; height: 1px; background: #3a354b; }
-    .step { z-index: 1; display: grid; justify-items: center; gap: 5px; color: #8c8b9f; font-size: 8px; white-space: nowrap; }
-    .step .node { display: grid; place-items: center; width: 17px; height: 17px; border: 1px solid #57516c; border-radius: 50%; background: #171724; font-size: 8px; }
+    .journey { justify-content: space-between; position: relative; padding: 12px 4px 11px; }
+    .journey::before { content: ""; position: absolute; top: 20px; left: 9%; right: 9%; height: 1px; background: #3a354b; }
+    .step { z-index: 1; display: grid; justify-items: center; gap: 4px; color: #8c8b9f; font-size: 7.5px; white-space: nowrap; }
+    .step .node { display: grid; place-items: center; width: 16px; height: 16px; border: 1px solid #57516c; border-radius: 50%; background: #171724; font-size: 7.5px; }
     .step.done { color: #c9c3d4; }
     .step.done .node { color: var(--mint); border-color: #3e8c77; background: #10221f; }
     .step.active { color: var(--purple-soft); }
     .step.active .node { color: white; border-color: var(--purple); background: #542078; box-shadow: 0 0 14px rgba(170,59,255,.35); }
 
-    .review-grid { display: grid; grid-template-columns: 1.02fr .98fr; gap: 10px; }
-    .alert-card, .feedback-card { padding: 11px; border: 1px solid #292b3b; border-radius: 7px; background: #10121d; min-width: 0; }
-    .mini-label { color: #87879a; font-size: 8px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; }
-    .score-head { justify-content: space-between; margin: 7px 0 8px; }
-    .score-number { font: 600 26px/1 "Space Grotesk", sans-serif; color: var(--coral); }
-    .score-number small { font: 500 9px "DM Sans", sans-serif; color: #aaa8b8; }
-    .alert-id { color: #9997a9; font: 9px "DM Sans", sans-serif; }
-    .factor { gap: 7px; margin: 7px 0; font-size: 8px; color: #c1c0ce; }
-    .factor .name { width: 76px; white-space: nowrap; }
-    .bar { height: 5px; flex: 1; background: #292a38; border-radius: 9px; overflow: hidden; }
+    .review-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; flex: 1; min-height: 0; }
+    .alert-card, .feedback-card, .ai-card { padding: 10px; border: 1px solid #292b3b; border-radius: 7px; background: #10121d; min-width: 0; display: flex; flex-direction: column; }
+    .mini-label { color: #87879a; font-size: 7.5px; font-weight: 700; letter-spacing: 1.1px; text-transform: uppercase; }
+    .score-head { justify-content: space-between; margin: 6px 0 7px; }
+    .score-number { font: 600 23px/1 "Space Grotesk", sans-serif; color: var(--coral); }
+    .score-number small { font: 500 8px "DM Sans", sans-serif; color: #aaa8b8; }
+    .alert-id { color: #9997a9; font: 8px "DM Sans", sans-serif; }
+    .factor { gap: 6px; margin: 5px 0; font-size: 7.5px; color: #c1c0ce; }
+    .factor .name { width: 68px; white-space: nowrap; }
+    .bar { height: 4px; flex: 1; background: #292a38; border-radius: 9px; overflow: hidden; }
     .bar i { display: block; height: 100%; border-radius: inherit; background: linear-gradient(90deg, #7d37d5, var(--purple)); }
-    .factor em { width: 23px; color: #ece8f5; font-style: normal; text-align: right; }
-    .score-note { margin-top: 8px; padding-top: 7px; border-top: 1px solid #272938; color: #a5a4b4; font-size: 8px; line-height: 1.4; }
+    .factor em { width: 20px; color: #ece8f5; font-style: normal; text-align: right; }
+    .score-note { margin-top: auto; padding-top: 6px; border-top: 1px solid #272938; color: #a5a4b4; font-size: 7.5px; line-height: 1.35; }
     .score-note b { color: var(--purple-soft); font-weight: 600; }
 
-    .feedback-card { display: flex; flex-direction: column; }
-    .feedback-card .mini-label { margin-bottom: 8px; }
-    .feedback-copy { margin: 0 0 9px; color: #c1c0ce; font-size: 10px; line-height: 1.4; }
+    .feedback-copy { margin: 0 0 8px; color: #c1c0ce; font-size: 9px; line-height: 1.4; }
     .outcomes { display: grid; grid-template-columns: 1fr 1fr; gap: 5px; }
-    .outcome { padding: 7px 4px; border-radius: 4px; text-align: center; font-size: 8px; font-weight: 700; letter-spacing: .4px; }
+    .outcome { padding: 6px 4px; border-radius: 4px; text-align: center; font-size: 7.5px; font-weight: 700; letter-spacing: .3px; }
     .outcome.true { color: #ffaaa2; border: 1px solid #62383c; background: #28191f; }
     .outcome.false { color: var(--mint); border: 1px solid #295347; background: #12221e; }
-    .loop { justify-content: center; gap: 7px; margin-top: 10px; color: var(--purple-soft); font-size: 8px; text-align: center; }
-    .loop b { font-size: 13px; font-weight: 500; }
-    .report { display: flex; align-items: center; gap: 7px; margin-top: auto; padding: 8px; border: 1px solid #4f3e5c; border-radius: 5px; background: rgba(85,43,116,.16); color: #dec6f5; font-size: 8px; }
-    .report .doc { display: grid; place-items: center; width: 17px; height: 20px; border: 1px solid #9f69c6; border-radius: 3px; color: var(--purple-soft); font-size: 10px; }
+    .loop { justify-content: center; gap: 6px; margin-top: 8px; color: var(--purple-soft); font-size: 7.5px; text-align: center; }
+    .loop b { font-size: 12px; font-weight: 500; }
+    .report { display: flex; align-items: center; gap: 6px; margin-top: auto; padding: 7px; border: 1px solid #4f3e5c; border-radius: 5px; background: rgba(85,43,116,.16); color: #dec6f5; font-size: 7.5px; }
+    .report .doc { display: grid; place-items: center; width: 16px; height: 19px; border: 1px solid #9f69c6; border-radius: 3px; color: var(--purple-soft); font-size: 9px; flex-shrink: 0; }
 
-    .bottom { justify-content: space-between; gap: 12px; margin-top: 1.35%; padding-top: 12px; border-top: 1px solid #292a38; }
-    .thesis { color: #b9b8c8; font-size: 10px; }
+    .ai-card { border-color: #295347; background: #12221e; }
+    .ai-head { justify-content: space-between; margin: 6px 0 7px; }
+    .ai-badge { padding: 3px 7px; border-radius: 5px; background: rgba(245,201,106,.14); color: var(--gold); font-size: 7px; font-weight: 700; letter-spacing: .3px; }
+    .ai-score { font: 600 23px/1 "Space Grotesk", sans-serif; color: var(--gold); }
+    .ai-score small { font: 500 8px "DM Sans", sans-serif; color: #aaa8b8; }
+    .ai-reasons { margin: 0; padding-left: 13px; color: #c1c0ce; font-size: 8px; line-height: 1.5; }
+    .ai-note { margin-top: auto; padding-top: 6px; border-top: 1px solid #23382f; color: #9fc9ba; font-size: 7.5px; line-height: 1.35; }
+    .ai-note b { color: var(--mint); font-weight: 600; }
+
+    .bottom { justify-content: space-between; gap: 12px; margin-top: 1.1%; padding-top: 10px; border-top: 1px solid #292a38; }
+    .thesis { color: #b9b8c8; font-size: 9.5px; }
     .thesis b { color: var(--text); font-weight: 600; }
     .thesis .arrow { margin: 0 5px; color: var(--purple); }
     .demo { gap: 11px; white-space: nowrap; }
@@ -152,7 +161,7 @@
     .demo-credentials code { color: #beb9cb; font: 8px "DM Sans", sans-serif; }
 
     .reveal { animation: rise .6s both; }
-    .story.why { animation-delay: .08s; }
+    .story.why, .story.opinion { animation-delay: .08s; }
     .product { animation-delay: .16s; }
     .bottom { animation-delay: .24s; }
     @keyframes rise { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
@@ -167,11 +176,13 @@
       .topline { margin-bottom: 25px; }
       .top-meta { font-size: 8px; }
       .hero { margin-bottom: 22px; }
-      h1 { font-size: clamp(32px, 8vw, 48px); }
+      h1 { font-size: clamp(30px, 8vw, 46px); }
       .content { grid-template-columns: 1fr; gap: 14px; }
-      .narrative { grid-template-rows: auto auto; }
+      .narrative { grid-template-rows: auto auto auto; }
       .story p { font-size: 13px; }
+      .story h2 { font-size: 17px; }
       .product { padding: 13px; }
+      .review-grid { grid-template-columns: 1fr; }
       .bottom { align-items: flex-start; flex-direction: column; margin-top: 18px; }
       .demo { flex-wrap: wrap; white-space: normal; }
     }
@@ -180,8 +191,7 @@
       .top-meta .edition { display: none; }
       .journey { padding-left: 0; padding-right: 0; }
       .step { font-size: 7px; }
-      .review-grid { grid-template-columns: 1fr; }
-      .feedback-card { min-height: 150px; }
+      .feedback-card, .ai-card { min-height: 150px; }
       .factor .name { width: 82px; }
       .demo-credentials { flex-wrap: wrap; }
     }
@@ -202,7 +212,7 @@
   <main class="slide" aria-label="SamaSini AI-assisted fraud detection console pitch slide">
     <header class="topline reveal">
       <div class="brand"><span class="mark" aria-hidden="true"></span><span>SamaSini</span></div>
-      <div class="top-meta"><span class="edition"><b>BFSI AI</b> / HACKATHON</span><span>Problem &amp; opportunity</span></div>
+      <div class="top-meta"><span class="edition"><b>BFSI AI</b> / HACKATHON</span><span>Problem, solution &amp; what's new</span></div>
     </header>
 
     <section class="hero reveal">
@@ -211,18 +221,24 @@
     </section>
 
     <div class="content">
-      <section class="narrative" aria-label="Problem and rationale">
+      <section class="narrative" aria-label="Problem, rationale and new AI capability">
         <article class="story problem reveal">
           <div class="section-label"><span class="pin"></span> The problem we chose</div>
           <h2>Fraud investigations are fragmented. Risk scores are opaque.</h2>
-          <p>Analysts jump between registration, KYC, screening, transaction monitoring and reporting systems. Black-box scores show <strong>what was flagged, not why</strong>; analyst true/false-positive decisions rarely feed back, so the same noisy alerts return and trust erodes.</p>
+          <p>Analysts jump between registration, KYC, screening, transaction monitoring and reporting systems. Black-box scores show <strong>what was flagged, not why</strong>; analyst decisions rarely feed back, so noisy alerts return and trust erodes.</p>
           <div class="stakes"><span class="stake">Financial loss</span><span class="stake">Compliance exposure</span><span class="stake">Alert fatigue</span></div>
         </article>
 
         <article class="story why reveal">
           <div class="section-label"><span class="pin"></span> Why this problem</div>
           <h2>High stakes. A clear role for explainable AI.</h2>
-          <p>Across onboarding, lending, guidance, document processing and service, fraud investigation pairs <strong>urgent financial and compliance risk</strong> with a practical opportunity: show the evidence behind each flag, then learn from the analyst who reviews it.</p>
+          <p>Fraud investigation pairs <strong>urgent financial and compliance risk</strong> with a practical opportunity: show the evidence behind each flag, then learn from the analyst who reviews it.</p>
+        </article>
+
+        <article class="story opinion reveal">
+          <div class="section-label"><span class="pin"></span> What's new — augmenting the analyst</div>
+          <h2>A second opinion, and an agent you can ask why</h2>
+          <p>An independent rule-based scorer that can agree or disagree with the primary score, plus a <strong>free, fully local</strong> investigation assistant — no external API, no black box.</p>
         </article>
       </section>
 
@@ -242,28 +258,38 @@
         <div class="review-grid">
           <div class="alert-card">
             <div class="mini-label">Explainable alert · TXN-80421</div>
-            <div class="score-head"><div class="score-number">86 <small>/ 100 risk</small></div><div class="alert-id">HIGH · ₹84,500</div></div>
+            <div class="score-head"><div class="score-number">86 <small>/ 100</small></div><div class="alert-id">HIGH · ₹84,500</div></div>
             <div class="factor"><span class="name">Velocity</span><span class="bar"><i style="width:88%"></i></span><em>+24</em></div>
-            <div class="factor"><span class="name">Amount deviation</span><span class="bar"><i style="width:77%"></i></span><em>+21</em></div>
+            <div class="factor"><span class="name">Amount dev.</span><span class="bar"><i style="width:77%"></i></span><em>+21</em></div>
             <div class="factor"><span class="name">Geo mismatch</span><span class="bar"><i style="width:64%"></i></span><em>+18</em></div>
             <div class="factor"><span class="name">Device change</span><span class="bar"><i style="width:49%"></i></span><em>+13</em></div>
-            <div class="factor"><span class="name">Watchlist match</span><span class="bar"><i style="width:37%"></i></span><em>+10</em></div>
-            <div class="score-note"><b>Weighted, inspectable formula</b> · each factor adds visible points; no black box.</div>
+            <div class="score-note"><b>Weighted, inspectable formula</b> · no black box.</div>
+          </div>
+
+          <div class="ai-card">
+            <div class="mini-label">AI second opinion</div>
+            <div class="ai-head"><div class="ai-score">58 <small>/ 100</small></div><span class="ai-badge">SUSPICIOUS</span></div>
+            <ul class="ai-reasons">
+              <li>Amount is 3.2x the customer's average.</li>
+              <li>Outside the customer's home market.</li>
+              <li>Merchant category linked to fraud.</li>
+            </ul>
+            <div class="ai-note"><b>Ask it why</b> · local investigation assistant answers analyst questions from this data — no API call.</div>
           </div>
 
           <div class="feedback-card">
             <div class="mini-label">Analyst review → detection learns</div>
-            <p class="feedback-copy">Confirm the outcome. The factors behind this alert are reinforced or dampened for future scoring.</p>
+            <p class="feedback-copy">Confirm the outcome. Contributing factors are reinforced or dampened for future scoring.</p>
             <div class="outcomes"><div class="outcome true">TRUE POSITIVE</div><div class="outcome false">FALSE POSITIVE</div></div>
-            <div class="loop"><span>Reinforce</span><b>↗</b><span>or dampen factor weights</span></div>
-            <div class="report"><span class="doc">↗</span><span><strong>True positive</strong> · fraud report auto-generated</span></div>
+            <div class="loop"><span>Reinforce</span><b>↗</b><span>or dampen weights</span></div>
+            <div class="report"><span class="doc">↗</span><span><strong>True positive</strong> · report auto-filed</span></div>
           </div>
         </div>
       </section>
     </div>
 
     <footer class="bottom reveal">
-      <div class="thesis"><b>Connect the journey</b><span class="arrow">→</span><b>explain every flag</b><span class="arrow">→</span><b>learn from every review</b></div>
+      <div class="thesis"><b>Connect the journey</b><span class="arrow">→</span><b>explain every flag</b><span class="arrow">→</span><b>get a second opinion</b><span class="arrow">→</span><b>learn from every review</b></div>
       <div class="demo">
         <a href="https://console.samasini.com/" target="_blank" rel="noopener noreferrer">Open live demo ↗</a>
         <div class="demo-credentials"><span>Demo login</span><code>dev@mulai.com</code><span>/</span><code>fraud123</code></div>
