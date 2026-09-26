@@ -1,0 +1,274 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#080912">
+  <title>SamaSini — AI-Assisted Fraud Detection Console</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      color-scheme: dark;
+      --ink: #080912;
+      --panel: #10121e;
+      --panel-raised: #151827;
+      --line: #282b3c;
+      --text: #f5f3fb;
+      --muted: #a2a2b5;
+      --purple: #aa3bff;
+      --purple-soft: #d7a3ff;
+      --mint: #6ee7c4;
+      --coral: #ff786e;
+      --gold: #f5c96a;
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body { margin: 0; min-height: 100%; background: var(--ink); }
+
+    body {
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      color: var(--text);
+      font-family: "DM Sans", sans-serif;
+      background:
+        radial-gradient(ellipse at 78% 18%, rgba(109, 42, 159, .16), transparent 36%),
+        linear-gradient(135deg, #080912 0%, #0b0c16 58%, #11101a 100%);
+      padding: 24px;
+    }
+
+    .slide {
+      position: relative;
+      isolation: isolate;
+      width: min(100%, 1600px);
+      aspect-ratio: 16 / 9;
+      min-height: 640px;
+      overflow: hidden;
+      padding: 3.15% 4.2% 2.5%;
+      border: 1px solid rgba(180, 164, 220, .18);
+      background:
+        linear-gradient(rgba(255,255,255,.018) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.018) 1px, transparent 1px),
+        linear-gradient(145deg, #0b0c16 0%, #0d0e19 58%, #10101b 100%);
+      background-size: 36px 36px, 36px 36px, auto;
+      box-shadow: 0 36px 100px rgba(0,0,0,.5);
+    }
+
+    .slide::before {
+      content: "";
+      position: absolute;
+      z-index: -1;
+      inset: 0 auto 0 0;
+      width: 4px;
+      background: linear-gradient(180deg, var(--purple), #6b38ff 54%, transparent);
+    }
+
+    .topline, .brand, .top-meta, .eyebrow, .section-label, .console-head, .journey, .score-head, .factor, .loop, .bottom, .demo, .demo-credentials {
+      display: flex;
+      align-items: center;
+    }
+
+    .topline { justify-content: space-between; margin-bottom: 2.1%; }
+    .brand { gap: 11px; font: 700 17px "Space Grotesk", sans-serif; letter-spacing: .2px; }
+    .mark { width: 28px; height: 28px; position: relative; border: 1px solid var(--purple); transform: rotate(45deg); border-radius: 8px; }
+    .mark::before, .mark::after { content: ""; position: absolute; inset: 6px; border: 1px solid var(--purple-soft); border-radius: 50%; }
+    .mark::after { inset: 10px; background: var(--purple); border: 0; }
+    .top-meta { gap: 10px; color: var(--muted); font-size: 10px; letter-spacing: 1.4px; text-transform: uppercase; }
+    .edition { padding: 7px 10px; border: 1px solid var(--line); border-radius: 99px; }
+    .edition b { color: var(--purple-soft); font-weight: 600; }
+
+    .hero { margin-bottom: 2.15%; }
+    .eyebrow { gap: 9px; color: var(--purple-soft); font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 10px; }
+    .eyebrow::before { content: ""; width: 20px; height: 1px; background: var(--purple); }
+    h1 { max-width: 950px; margin: 0; font: 600 clamp(32px, 3.45vw, 54px)/1.02 "Space Grotesk", sans-serif; letter-spacing: -.6px; }
+    h1 .accent { color: var(--purple-soft); }
+
+    .content { display: grid; grid-template-columns: .87fr 1.13fr; gap: 2.2%; align-items: stretch; }
+    .narrative { display: grid; grid-template-rows: 1.08fr .92fr; gap: 14px; min-width: 0; }
+    .story { position: relative; padding: 17px 19px 16px; background: rgba(16,18,30,.9); border: 1px solid var(--line); border-radius: 9px; overflow: hidden; }
+    .story.problem { border-left: 2px solid var(--coral); }
+    .story.why { border-left: 2px solid var(--gold); }
+    .section-label { gap: 8px; margin-bottom: 9px; color: var(--muted); font-size: 9px; font-weight: 700; letter-spacing: 1.6px; text-transform: uppercase; }
+    .section-label .pin { width: 6px; height: 6px; border-radius: 50%; background: var(--coral); }
+    .why .section-label .pin { background: var(--gold); }
+    .story h2 { margin: 0 0 8px; font: 600 17px/1.18 "Space Grotesk", sans-serif; }
+    .story p { margin: 0; color: #b9b8c8; font-size: clamp(11px, .95vw, 14px); line-height: 1.52; }
+    .story p strong { color: var(--text); font-weight: 600; }
+    .stakes { display: flex; gap: 7px; margin-top: 11px; }
+    .stake { padding: 5px 8px; border: 1px solid #353044; border-radius: 4px; color: #d3c7e2; font-size: 9px; }
+    .stake:first-child { border-color: #583647; color: #ffaaa2; }
+
+    .product { min-width: 0; padding: 16px; border: 1px solid #343044; border-radius: 10px; background: linear-gradient(150deg, rgba(23,24,39,.98), rgba(14,15,25,.98)); box-shadow: inset 0 1px rgba(255,255,255,.035); }
+    .console-head { justify-content: space-between; padding-bottom: 12px; border-bottom: 1px solid var(--line); }
+    .console-title { font: 600 13px "Space Grotesk", sans-serif; }
+    .live { display: flex; align-items: center; gap: 6px; color: var(--mint); font-size: 8px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; }
+    .live i { width: 6px; height: 6px; background: var(--mint); border-radius: 50%; box-shadow: 0 0 10px rgba(110,231,196,.7); }
+    .journey { justify-content: space-between; position: relative; padding: 15px 4px 13px; }
+    .journey::before { content: ""; position: absolute; top: 23px; left: 9%; right: 9%; height: 1px; background: #3a354b; }
+    .step { z-index: 1; display: grid; justify-items: center; gap: 5px; color: #8c8b9f; font-size: 8px; white-space: nowrap; }
+    .step .node { display: grid; place-items: center; width: 17px; height: 17px; border: 1px solid #57516c; border-radius: 50%; background: #171724; font-size: 8px; }
+    .step.done { color: #c9c3d4; }
+    .step.done .node { color: var(--mint); border-color: #3e8c77; background: #10221f; }
+    .step.active { color: var(--purple-soft); }
+    .step.active .node { color: white; border-color: var(--purple); background: #542078; box-shadow: 0 0 14px rgba(170,59,255,.35); }
+
+    .review-grid { display: grid; grid-template-columns: 1.02fr .98fr; gap: 10px; }
+    .alert-card, .feedback-card { padding: 11px; border: 1px solid #292b3b; border-radius: 7px; background: #10121d; min-width: 0; }
+    .mini-label { color: #87879a; font-size: 8px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; }
+    .score-head { justify-content: space-between; margin: 7px 0 8px; }
+    .score-number { font: 600 26px/1 "Space Grotesk", sans-serif; color: var(--coral); }
+    .score-number small { font: 500 9px "DM Sans", sans-serif; color: #aaa8b8; }
+    .alert-id { color: #9997a9; font: 9px "DM Sans", sans-serif; }
+    .factor { gap: 7px; margin: 7px 0; font-size: 8px; color: #c1c0ce; }
+    .factor .name { width: 76px; white-space: nowrap; }
+    .bar { height: 5px; flex: 1; background: #292a38; border-radius: 9px; overflow: hidden; }
+    .bar i { display: block; height: 100%; border-radius: inherit; background: linear-gradient(90deg, #7d37d5, var(--purple)); }
+    .factor em { width: 23px; color: #ece8f5; font-style: normal; text-align: right; }
+    .score-note { margin-top: 8px; padding-top: 7px; border-top: 1px solid #272938; color: #a5a4b4; font-size: 8px; line-height: 1.4; }
+    .score-note b { color: var(--purple-soft); font-weight: 600; }
+
+    .feedback-card { display: flex; flex-direction: column; }
+    .feedback-card .mini-label { margin-bottom: 8px; }
+    .feedback-copy { margin: 0 0 9px; color: #c1c0ce; font-size: 10px; line-height: 1.4; }
+    .outcomes { display: grid; grid-template-columns: 1fr 1fr; gap: 5px; }
+    .outcome { padding: 7px 4px; border-radius: 4px; text-align: center; font-size: 8px; font-weight: 700; letter-spacing: .4px; }
+    .outcome.true { color: #ffaaa2; border: 1px solid #62383c; background: #28191f; }
+    .outcome.false { color: var(--mint); border: 1px solid #295347; background: #12221e; }
+    .loop { justify-content: center; gap: 7px; margin-top: 10px; color: var(--purple-soft); font-size: 8px; text-align: center; }
+    .loop b { font-size: 13px; font-weight: 500; }
+    .report { display: flex; align-items: center; gap: 7px; margin-top: auto; padding: 8px; border: 1px solid #4f3e5c; border-radius: 5px; background: rgba(85,43,116,.16); color: #dec6f5; font-size: 8px; }
+    .report .doc { display: grid; place-items: center; width: 17px; height: 20px; border: 1px solid #9f69c6; border-radius: 3px; color: var(--purple-soft); font-size: 10px; }
+
+    .bottom { justify-content: space-between; gap: 12px; margin-top: 1.35%; padding-top: 12px; border-top: 1px solid #292a38; }
+    .thesis { color: #b9b8c8; font-size: 10px; }
+    .thesis b { color: var(--text); font-weight: 600; }
+    .thesis .arrow { margin: 0 5px; color: var(--purple); }
+    .demo { gap: 11px; white-space: nowrap; }
+    .demo a { color: #e5d1fa; font-size: 10px; font-weight: 600; text-decoration: none; border-bottom: 1px solid #7547a1; padding-bottom: 2px; }
+    .demo-credentials { gap: 6px; color: #858496; font-size: 8px; }
+    .demo-credentials code { color: #beb9cb; font: 8px "DM Sans", sans-serif; }
+
+    .reveal { animation: rise .6s both; }
+    .story.why { animation-delay: .08s; }
+    .product { animation-delay: .16s; }
+    .bottom { animation-delay: .24s; }
+    @keyframes rise { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+    @media (min-width: 1601px) {
+      .slide { padding: 50px 67px 40px; }
+    }
+
+    @media (max-width: 900px) {
+      body { display: block; padding: 0; }
+      .slide { width: 100%; min-height: 100vh; height: auto; aspect-ratio: auto; padding: 28px 22px; border: 0; }
+      .topline { margin-bottom: 25px; }
+      .top-meta { font-size: 8px; }
+      .hero { margin-bottom: 22px; }
+      h1 { font-size: clamp(32px, 8vw, 48px); }
+      .content { grid-template-columns: 1fr; gap: 14px; }
+      .narrative { grid-template-rows: auto auto; }
+      .story p { font-size: 13px; }
+      .product { padding: 13px; }
+      .bottom { align-items: flex-start; flex-direction: column; margin-top: 18px; }
+      .demo { flex-wrap: wrap; white-space: normal; }
+    }
+
+    @media (max-width: 480px) {
+      .top-meta .edition { display: none; }
+      .journey { padding-left: 0; padding-right: 0; }
+      .step { font-size: 7px; }
+      .review-grid { grid-template-columns: 1fr; }
+      .feedback-card { min-height: 150px; }
+      .factor .name { width: 82px; }
+      .demo-credentials { flex-wrap: wrap; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; }
+    }
+
+    @media print {
+      @page { size: 16in 9in; margin: 0; }
+      html, body { width: 16in; height: 9in; background: #080912 !important; print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+      body { display: block; padding: 0; }
+      .slide { width: 16in; height: 9in; min-height: 0; aspect-ratio: 16 / 9; border: 0; box-shadow: none; }
+    }
+  </style>
+</head>
+<body>
+  <main class="slide" aria-label="SamaSini AI-assisted fraud detection console pitch slide">
+    <header class="topline reveal">
+      <div class="brand"><span class="mark" aria-hidden="true"></span><span>SamaSini</span></div>
+      <div class="top-meta"><span class="edition"><b>BFSI AI</b> / HACKATHON</span><span>Problem &amp; opportunity</span></div>
+    </header>
+
+    <section class="hero reveal">
+      <div class="eyebrow">A clearer signal in a high-stakes workflow</div>
+      <h1>SamaSini <span class="accent">— AI-Assisted<br class="desktop-break"> Fraud Detection Console</span></h1>
+    </section>
+
+    <div class="content">
+      <section class="narrative" aria-label="Problem and rationale">
+        <article class="story problem reveal">
+          <div class="section-label"><span class="pin"></span> The problem we chose</div>
+          <h2>Fraud investigations are fragmented. Risk scores are opaque.</h2>
+          <p>Analysts jump between registration, KYC, screening, transaction monitoring and reporting systems. Black-box scores show <strong>what was flagged, not why</strong>; analyst true/false-positive decisions rarely feed back, so the same noisy alerts return and trust erodes.</p>
+          <div class="stakes"><span class="stake">Financial loss</span><span class="stake">Compliance exposure</span><span class="stake">Alert fatigue</span></div>
+        </article>
+
+        <article class="story why reveal">
+          <div class="section-label"><span class="pin"></span> Why this problem</div>
+          <h2>High stakes. A clear role for explainable AI.</h2>
+          <p>Across onboarding, lending, guidance, document processing and service, fraud investigation pairs <strong>urgent financial and compliance risk</strong> with a practical opportunity: show the evidence behind each flag, then learn from the analyst who reviews it.</p>
+        </article>
+      </section>
+
+      <section class="product reveal" aria-label="SamaSini solution overview">
+        <div class="console-head">
+          <div class="console-title">One investigation. The full customer journey.</div>
+          <div class="live"><i></i> Synthetic live feed</div>
+        </div>
+        <div class="journey" aria-label="Registration to reporting workflow">
+          <div class="step done"><span class="node">✓</span><span>Registration</span></div>
+          <div class="step done"><span class="node">✓</span><span>KYC</span></div>
+          <div class="step done"><span class="node">✓</span><span>Screening</span></div>
+          <div class="step active"><span class="node">4</span><span>Monitoring</span></div>
+          <div class="step"><span class="node">5</span><span>Reporting</span></div>
+        </div>
+
+        <div class="review-grid">
+          <div class="alert-card">
+            <div class="mini-label">Explainable alert · TXN-80421</div>
+            <div class="score-head"><div class="score-number">86 <small>/ 100 risk</small></div><div class="alert-id">HIGH · ₹84,500</div></div>
+            <div class="factor"><span class="name">Velocity</span><span class="bar"><i style="width:88%"></i></span><em>+24</em></div>
+            <div class="factor"><span class="name">Amount deviation</span><span class="bar"><i style="width:77%"></i></span><em>+21</em></div>
+            <div class="factor"><span class="name">Geo mismatch</span><span class="bar"><i style="width:64%"></i></span><em>+18</em></div>
+            <div class="factor"><span class="name">Device change</span><span class="bar"><i style="width:49%"></i></span><em>+13</em></div>
+            <div class="factor"><span class="name">Watchlist match</span><span class="bar"><i style="width:37%"></i></span><em>+10</em></div>
+            <div class="score-note"><b>Weighted, inspectable formula</b> · each factor adds visible points; no black box.</div>
+          </div>
+
+          <div class="feedback-card">
+            <div class="mini-label">Analyst review → detection learns</div>
+            <p class="feedback-copy">Confirm the outcome. The factors behind this alert are reinforced or dampened for future scoring.</p>
+            <div class="outcomes"><div class="outcome true">TRUE POSITIVE</div><div class="outcome false">FALSE POSITIVE</div></div>
+            <div class="loop"><span>Reinforce</span><b>↗</b><span>or dampen factor weights</span></div>
+            <div class="report"><span class="doc">↗</span><span><strong>True positive</strong> · fraud report auto-generated</span></div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <footer class="bottom reveal">
+      <div class="thesis"><b>Connect the journey</b><span class="arrow">→</span><b>explain every flag</b><span class="arrow">→</span><b>learn from every review</b></div>
+      <div class="demo">
+        <a href="https://console.samasini.com/" target="_blank" rel="noopener noreferrer">Open live demo ↗</a>
+        <div class="demo-credentials"><span>Demo login</span><code>dev@mulai.com</code><span>/</span><code>fraud123</code></div>
+      </div>
+    </footer>
+  </main>
+</body>
+</html>
