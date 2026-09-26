@@ -1,13 +1,14 @@
+import { Link } from 'react-router-dom';
 import { useApp } from '../context/AppContext';
 
 export default function Overview() {
-  const { customers, transactions, alerts, reports } = useApp();
+  const { customers, transactions, reports } = useApp();
 
   const verified = customers.filter((c) => c.kycStatus === 'verified').length;
   const pendingKyc = customers.filter((c) => c.kycStatus === 'pending').length;
   const screeningHits = customers.filter((c) => c.screeningHit).length;
   const monitored = transactions.length;
-  const openAlerts = alerts.filter((a) => a.status !== 'resolved').length;
+  const openAlerts = transactions.filter((t) => t.flagged && t.reviewStatus === 'unreviewed').length;
 
   const stages = [
     { label: 'Registration', value: customers.length, note: 'accounts onboarded' },
@@ -44,7 +45,7 @@ export default function Overview() {
         <div className="px-4 py-3 border-b border-slate-800 text-sm font-medium text-white">Recent transactions</div>
         <div className="divide-y divide-slate-800/60 max-h-96 overflow-y-auto">
           {transactions.slice(0, 12).map((t) => (
-            <div key={t.id} className="px-4 py-3 flex items-center justify-between text-sm">
+            <Link key={t.id} to={`/transactions/${t.id}`} className="px-4 py-3 flex items-center justify-between text-sm hover:bg-slate-800/40 transition">
               <div>
                 <div className="text-white">{t.customerName}</div>
                 <div className="text-xs text-slate-500">
@@ -54,7 +55,7 @@ export default function Overview() {
               <div className={`text-xs font-semibold px-2 py-1 rounded-md ${t.flagged ? 'bg-red-950/60 text-red-400' : 'bg-slate-800 text-slate-400'}`}>
                 {t.flagged ? `FLAGGED · ${t.score}` : `score ${t.score}`}
               </div>
-            </div>
+            </Link>
           ))}
           {transactions.length === 0 && <div className="px-4 py-6 text-sm text-slate-500 text-center">Waiting for the first synthetic transactions…</div>}
         </div>

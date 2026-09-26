@@ -2,5 +2,7 @@
 deployment:
   tasks:
     - export DEPLOYPATH=/home/samasini/public_html/console/
+    - export WWWPATH=/home/samasini/public_html/
     - /bin/mkdir -p $DEPLOYPATH
     - /bin/cp -R dist/. $DEPLOYPATH
+    - /bin/cp -R landing/. $WWWPATH

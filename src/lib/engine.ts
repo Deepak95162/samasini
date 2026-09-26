@@ -113,6 +113,8 @@ export function generateTransaction(customers: Customer[], weights: Weights, rec
     breakdown,
     score,
     flagged: score >= FLAG_THRESHOLD,
+    reviewStatus: 'unreviewed',
+    verdict: null,
   };
 }
 

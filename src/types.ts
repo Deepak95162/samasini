@@ -25,6 +25,9 @@ export interface ScoreBreakdown {
   blacklistMatch: number;
 }
 
+export type Verdict = 'true_positive' | 'false_positive' | null;
+export type ReviewStatus = 'unreviewed' | 'resolved';
+
 export interface Transaction {
   id: string;
   customerId: string;
@@ -39,20 +42,7 @@ export interface Transaction {
   breakdown: ScoreBreakdown;
   score: number;
   flagged: boolean;
-}
-
-export type AlertStatus = 'new' | 'reviewing' | 'resolved';
-export type Verdict = 'true_positive' | 'false_positive' | null;
-
-export interface Alert {
-  id: string;
-  transactionId: string;
-  customerId: string;
-  customerName: string;
-  score: number;
-  breakdown: ScoreBreakdown;
-  createdAt: number;
-  status: AlertStatus;
+  reviewStatus: ReviewStatus;
   verdict: Verdict;
   resolvedBy?: string;
   resolvedAt?: number;
@@ -61,7 +51,8 @@ export interface Alert {
 
 export interface FraudReport {
   id: string;
-  alertId: string;
+  transactionId: string;
+  customerId: string;
   customerName: string;
   createdBy: string;
   createdAt: number;

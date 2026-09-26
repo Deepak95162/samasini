@@ -1,12 +1,12 @@
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useApp } from '../context/AppContext';
 
 export default function NotificationBell() {
-  const { alerts } = useApp();
+  const { transactions } = useApp();
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
-  const pending = alerts.filter((a) => a.status !== 'resolved');
+  const pending = useMemo(() => transactions.filter((t) => t.flagged && t.reviewStatus === 'unreviewed'), [transactions]);
 
   return (
     <div className="relative">
@@ -25,20 +25,20 @@ export default function NotificationBell() {
           </div>
           <div className="max-h-80 overflow-y-auto">
             {pending.length === 0 && <div className="px-4 py-6 text-sm text-slate-500 text-center">No pending alerts.</div>}
-            {pending.slice(0, 8).map((a) => (
+            {pending.slice(0, 8).map((t) => (
               <button
-                key={a.id}
+                key={t.id}
                 onClick={() => {
                   setOpen(false);
-                  navigate('/monitoring');
+                  navigate(`/transactions/${t.id}`);
                 }}
                 className="w-full text-left px-4 py-3 border-b border-slate-800/60 hover:bg-slate-800/60 transition"
               >
                 <div className="flex items-center justify-between">
-                  <span className="text-sm text-white">{a.customerName}</span>
-                  <span className="text-xs font-semibold text-red-400">score {a.score}</span>
+                  <span className="text-sm text-white">{t.customerName}</span>
+                  <span className="text-xs font-semibold text-red-400">score {t.score}</span>
                 </div>
-                <div className="text-xs text-slate-500 mt-0.5">{new Date(a.createdAt).toLocaleTimeString()}</div>
+                <div className="text-xs text-slate-500 mt-0.5">{new Date(t.timestamp).toLocaleTimeString()}</div>
               </button>
             ))}
           </div>

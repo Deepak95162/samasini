@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>SamaSini — AI Fraud Detection for BFSI</title>
+<meta name="description" content="An AI-assisted fraud analyst console covering the full customer journey — registration, KYC, screening, transaction monitoring and reporting." />
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2220%22 fill=%22%23aa3bff%22/><text x=%2250%22 y=%2266%22 font-size=%2255%22 fill=%22white%22 text-anchor=%22middle%22 font-family=%22system-ui%22 font-weight=%22bold%22>S</text></svg>" />
+<style>
+  :root {
+    --bg: #0b0e14;
+    --panel: #131722;
+    --border: #232838;
+    --text: #e5e7eb;
+    --muted: #8b93a7;
+    --accent: #aa3bff;
+    --accent-2: #c084fc;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: system-ui, 'Segoe UI', Roboto, sans-serif;
+    line-height: 1.5;
+  }
+  a { color: var(--accent-2); }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+  header { padding: 28px 0; display: flex; align-items: center; justify-content: space-between; }
+  .brand { display: flex; align-items: center; gap: 10px; font-weight: 600; font-size: 18px; }
+  .logo {
+    width: 34px; height: 34px; border-radius: 9px;
+    background: rgba(170,59,255,0.18); color: var(--accent-2);
+    display: flex; align-items: center; justify-content: center; font-weight: 700;
+  }
+  nav a { margin-left: 24px; color: var(--muted); text-decoration: none; font-size: 14px; }
+  nav a:hover { color: var(--text); }
+
+  .hero { padding: 64px 0 48px; text-align: center; }
+  .hero .tag {
+    display: inline-block; font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase;
+    color: var(--accent-2); background: rgba(170,59,255,0.1); border: 1px solid rgba(170,59,255,0.3);
+    padding: 4px 12px; border-radius: 999px; margin-bottom: 18px;
+  }
+  .hero h1 { font-size: 44px; margin: 0 0 16px; letter-spacing: -0.02em; }
+  .hero h1 span { color: var(--accent-2); }
+  .hero p.sub { color: var(--muted); font-size: 18px; max-width: 620px; margin: 0 auto 32px; }
+  .cta-row { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px; padding: 12px 22px; border-radius: 10px;
+    font-weight: 600; font-size: 15px; text-decoration: none; transition: transform .15s ease;
+  }
+  .btn:hover { transform: translateY(-1px); }
+  .btn-primary { background: var(--accent); color: white; }
+  .btn-secondary { background: var(--panel); color: var(--text); border: 1px solid var(--border); }
+
+  section { padding: 48px 0; border-top: 1px solid var(--border); }
+  h2 { font-size: 26px; margin: 0 0 8px; }
+  .lead { color: var(--muted); margin: 0 0 32px; max-width: 640px; }
+
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 16px; }
+  .card {
+    background: var(--panel); border: 1px solid var(--border); border-radius: 14px; padding: 20px;
+  }
+  .card h3 { margin: 0 0 8px; font-size: 16px; }
+  .card p { margin: 0; color: var(--muted); font-size: 14px; }
+
+  .journey { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
+  .step {
+    flex: 1 1 140px; background: var(--panel); border: 1px solid var(--border); border-radius: 12px;
+    padding: 16px; text-align: center;
+  }
+  .step .n { color: var(--accent-2); font-weight: 700; font-size: 13px; margin-bottom: 6px; }
+  .step .l { font-size: 14px; }
+  .arrow { align-self: center; color: var(--border); font-size: 20px; }
+
+  footer { padding: 32px 0 48px; text-align: center; color: var(--muted); font-size: 13px; }
+
+  @media (max-width: 640px) {
+    .hero h1 { font-size: 32px; }
+    nav { display: none; }
+  }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="brand">
+        <div class="logo">S</div>
+        SamaSini
+      </div>
+      <nav>
+        <a href="#problem">Problem</a>
+        <a href="#solution">Solution</a>
+        <a href="https://console.samasini.com" target="_blank" rel="noopener">Live demo</a>
+      </nav>
+    </header>
+
+    <section class="hero" style="border-top:none;">
+      <span class="tag">BFSI AI Hackathon Prototype</span>
+      <h1>AI-assisted fraud detection,<br><span>built for the analyst</span></h1>
+      <p class="sub">
+        SamaSini gives fraud analysts a single console for the full customer
+        journey — onboarding, KYC, screening, transaction monitoring and
+        reporting — with a transparent, explainable AI score behind every
+        alert.
+      </p>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="https://console.samasini.com" target="_blank" rel="noopener">Open live demo →</a>
+        <a class="btn btn-secondary" href="#problem">Read the problem</a>
+      </div>
+    </section>
+
+    <section id="problem">
+      <h2>The problem</h2>
+      <p class="lead">
+        Fraud analysts at banks and financial institutions triage alerts
+        across legacy systems, manual review queues and disconnected tools —
+        slowing down decisions and making it harder to catch real fraud
+        patterns early.
+      </p>
+      <div class="grid">
+        <div class="card">
+          <h3>Fragmented journey</h3>
+          <p>Registration, KYC, screening and transaction data often live in separate systems with no unified view.</p>
+        </div>
+        <div class="card">
+          <h3>Opaque decisions</h3>
+          <p>Black-box risk scores make it hard for analysts to trust, explain or challenge a fraud flag.</p>
+        </div>
+        <div class="card">
+          <h3>No feedback loop</h3>
+          <p>Analyst decisions rarely feed back into the detection logic, so the same false positives keep recurring.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="solution">
+      <h2>What SamaSini does</h2>
+      <p class="lead">
+        One console for the entire fraud lifecycle, with a fully explainable
+        scoring formula and a live feedback loop from analyst decisions.
+      </p>
+      <div class="journey">
+        <div class="step"><div class="n">01</div><div class="l">Registration</div></div>
+        <div class="arrow">→</div>
+        <div class="step"><div class="n">02</div><div class="l">KYC</div></div>
+        <div class="arrow">→</div>
+        <div class="step"><div class="n">03</div><div class="l">Screening</div></div>
+        <div class="arrow">→</div>
+        <div class="step"><div class="n">04</div><div class="l">Transaction<br>Monitoring</div></div>
+        <div class="arrow">→</div>
+        <div class="step"><div class="n">05</div><div class="l">Reporting</div></div>
+      </div>
+    </section>
+
+    <footer>
+      Built in a 5-hour AI buildathon · Prototype only — synthetic data, no real fraud engine ·
+      <a href="https://console.samasini.com" target="_blank" rel="noopener">console.samasini.com</a>
+    </footer>
+  </div>
+</body>
+</html>

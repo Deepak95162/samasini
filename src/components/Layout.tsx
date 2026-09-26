@@ -6,6 +6,7 @@ import NotificationBell from './NotificationBell';
 const NAV = [
   { to: '/', label: 'Overview', icon: '◈' },
   { to: '/monitoring', label: 'Transaction Monitoring', icon: '⌁' },
+  { to: '/customers', label: 'Customers', icon: '☺' },
   { to: '/reports', label: 'Reports', icon: '▤' },
   { to: '/formula', label: 'Model Transparency', icon: 'ƒ' },
 ];

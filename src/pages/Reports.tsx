@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { useApp } from '../context/AppContext';
 
 export default function Reports() {
@@ -15,11 +16,14 @@ export default function Reports() {
         {reports.map((r) => (
           <div key={r.id} className="px-5 py-4">
             <div className="flex items-center justify-between mb-1">
-              <div className="text-white font-medium">{r.customerName}</div>
+              <Link to={`/customers/${r.customerId}`} className="text-white font-medium hover:text-purple-300">{r.customerName}</Link>
               <span className="text-xs font-semibold text-red-400 bg-red-950/60 px-2 py-0.5 rounded-md">score {r.score}</span>
             </div>
             <p className="text-sm text-slate-400">{r.summary}</p>
-            <div className="text-xs text-slate-600 mt-2">Filed by {r.createdBy} · {new Date(r.createdAt).toLocaleString()} · Report ID {r.id}</div>
+            <div className="text-xs text-slate-600 mt-2 flex items-center gap-3">
+              <span>Filed by {r.createdBy} · {new Date(r.createdAt).toLocaleString()} · Report ID {r.id}</span>
+              <Link to={`/transactions/${r.transactionId}`} className="text-purple-400 hover:text-purple-300">View transaction →</Link>
+            </div>
           </div>
         ))}
       </div>
