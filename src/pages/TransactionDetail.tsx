@@ -1,5 +1,8 @@
+import { useMemo, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useApp } from '../context/AppContext';
+import { getAiOpinion } from '../lib/aiSecondOpinion';
+import { answerQuestion, SUGGESTED_QUESTIONS } from '../lib/aiAssistant';
 
 export default function TransactionDetail() {
   const { id } = useParams<{ id: string }>();
@@ -9,6 +12,16 @@ export default function TransactionDetail() {
   const txn = id ? getTransaction(id) : undefined;
   const customer = txn ? getCustomer(txn.customerId) : undefined;
   const report = reports.find((r) => r.transactionId === txn?.id);
+  const opinion = useMemo(() => (txn ? getAiOpinion(txn, customer) : null), [txn, customer]);
+  const [chat, setChat] = useState<{ from: 'analyst' | 'ai'; text: string }[]>([]);
+  const [input, setInput] = useState('');
+
+  const ask = (question: string) => {
+    if (!question.trim() || !txn || !opinion) return;
+    const answer = answerQuestion(question, { txn, customer, opinion });
+    setChat((prev) => [...prev, { from: 'analyst', text: question }, { from: 'ai', text: answer }]);
+    setInput('');
+  };
 
   if (!txn) {
     return (
@@ -64,6 +77,33 @@ export default function TransactionDetail() {
         </div>
       </div>
 
+      {opinion && (
+        <div className="bg-slate-900 border border-slate-800 rounded-xl p-5">
+          <div className="flex items-center justify-between mb-3">
+            <div className="text-sm font-medium text-white">AI second opinion</div>
+            <div
+              className={`text-xs font-semibold px-2.5 py-1 rounded-md ${
+                opinion.verdict === 'likely_fraud'
+                  ? 'bg-red-950/60 text-red-400'
+                  : opinion.verdict === 'suspicious'
+                    ? 'bg-amber-950/60 text-amber-400'
+                    : 'bg-emerald-950/60 text-emerald-400'
+              }`}
+            >
+              {opinion.verdict.replace('_', ' ')} · score {opinion.score}
+            </div>
+          </div>
+          <ul className="space-y-1.5 text-sm text-slate-400 list-disc list-inside">
+            {opinion.reasons.map((reason, i) => (
+              <li key={i}>{reason}</li>
+            ))}
+          </ul>
+          <div className="text-xs text-slate-500 mt-3">
+            Independent rule-based check, computed separately from the primary weighted-sum score above — not a trained model.
+          </div>
+        </div>
+      )}
+
       <div className="bg-slate-900 border border-slate-800 rounded-xl p-5">
         <div className="text-sm font-medium text-white mb-3">Analyst investigation</div>
         {txn.reviewStatus === 'unreviewed' ? (
@@ -110,6 +150,62 @@ export default function TransactionDetail() {
             )}
           </div>
         )}
+      </div>
+
+      <div className="bg-slate-900 border border-slate-800 rounded-xl p-5">
+        <div className="text-sm font-medium text-white mb-1">Investigation assistant</div>
+        <div className="text-xs text-slate-500 mb-4">
+          Local, rule-based agent — answers are generated from this transaction's data, not a live model call.
+        </div>
+
+        <div className="flex flex-wrap gap-2 mb-4">
+          {SUGGESTED_QUESTIONS.map((q) => (
+            <button
+              key={q}
+              onClick={() => ask(q)}
+              className="text-xs px-2.5 py-1 rounded-md border border-slate-700 text-slate-300 hover:border-purple-700 hover:text-purple-300 transition"
+            >
+              {q}
+            </button>
+          ))}
+        </div>
+
+        {chat.length > 0 && (
+          <div className="space-y-3 mb-4 max-h-72 overflow-y-auto pr-1">
+            {chat.map((m, i) => (
+              <div key={i} className={m.from === 'analyst' ? 'text-right' : 'text-left'}>
+                <div
+                  className={`inline-block max-w-[85%] text-sm px-3 py-2 rounded-lg ${
+                    m.from === 'analyst' ? 'bg-purple-950/60 text-purple-200' : 'bg-slate-800 text-slate-300'
+                  }`}
+                >
+                  {m.text}
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            ask(input);
+          }}
+          className="flex gap-2"
+        >
+          <input
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            placeholder="Ask about this transaction…"
+            className="flex-1 bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-sm text-white placeholder:text-slate-600 focus:outline-none focus:border-purple-700"
+          />
+          <button
+            type="submit"
+            className="px-4 py-2 rounded-lg bg-purple-600 hover:bg-purple-500 text-white text-sm font-medium transition"
+          >
+            Ask
+          </button>
+        </form>
       </div>
     </div>
   );
