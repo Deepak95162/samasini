@@ -4,5 +4,6 @@ deployment:
     - export DEPLOYPATH=/home/samasini/public_html/console/
     - export WWWPATH=/home/samasini/public_html/
     - /bin/mkdir -p $DEPLOYPATH
+    - /bin/rm -rf $DEPLOYPATH/assets
     - /bin/cp -R dist/. $DEPLOYPATH
     - /bin/cp -R landing/. $WWWPATH
